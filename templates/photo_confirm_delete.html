@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Delete Photo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h2>Delete Photo</h2>
+        <p>Are you sure you want to delete this photo?</p>
+        <p><strong>{{ object }}</strong></p>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Delete">
+        </form>
+
+        <a href="{% url 'task_detail' pk=object.task.pk %}" class="btn btn-secondary">Cancel</a>
+        
+        <script src="" async defer></script>
+    </body>
+</html>

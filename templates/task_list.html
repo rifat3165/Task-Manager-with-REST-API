@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{% block title %} Home {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/task.css' %}">
+
+
+  </head>
+  <body>
+    <header>
+        <div class="header-part">
+            <a href="/cpass/"><input type="submit" value="Change Password"></a>
+        </div>
+        <div class="header-part">
+            <h1>Task Manager</h1>
+        </div>
+        <div class="header-part">
+            <a href="/logout/"><input type="submit" value="Logout"></a>
+        </div>
+    </header>
+
+    <div class="container">
+        {% block content %}
+        <input type="text" id="search-input" placeholder="Search tasks">
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Created</th>
+                    <th>Due</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>
+                        {% if task.photos.all %}
+                        <img src="{{ task.photos.all.first.image.url }}" width="50" alt="Task Image" />
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+                    </td>
+                    <td>{{ task.creation_date }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.priority }}</td>
+                    <td class="{% if task.is_complete %}complete{% else %}incomplete{% endif %}">
+                        {% if task.is_complete %}Complete{% else %}Incomplete{% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No tasks found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="add-task-button">
+            <a href="{% url 'task_create' %}">Add Task</a>
+        </div>
+        {%  endblock %}
+    </div>
+        
+        <footer>
+            <p>All Rights Reserved by @MonjurulRifat</p>
+        </footer>
+        <script src="" async defer></script>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{% block title %} Login {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+  </head>
+
+  <body>
+    
+      <header>
+        <h1>Task Manager</h1>
+     </header>
+
+     <div class="content">
+      {% block content %}
+
+        <div class="form-container">
+          <h2>Login</h2>
+          <form action="" method="POST" novalidate>
+              {% csrf_token %}
+              {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+              {% endif %}
+
+              {% for frm in form %}
+              <div class="form-group">
+                  <label for="{{ frm.id_for_label }}">{{ frm.label_tag }}</label>
+                  {{ frm }}
+                  <span class="error">{{ frm.errors | striptags }}</span>
+              </div>
+              {% endfor %}
+
+              <div class="form-group">
+                  <input type="submit" value="Login">
+              </div>
+           </form>
+           <div class="form-links">
+              <p>Forgot Password? <a href="/reset/">Reset</a></p>
+              <p>Don't have an account? <a href="/register/">Register</a></p>
+           </div>
+        </div>
+
+      {% endblock %}
+     </div>
+   
+      <footer>
+        <p>All Rights Reserved by @MonjurulRifat</p>
+    </footer>
+    
+  </body>
+</html>

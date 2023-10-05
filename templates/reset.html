@@ -1,0 +1,27 @@
+{% extends "login.html" %} {% block content %}
+        <div class="form-container">
+            <h2>Reset Password</h2>
+            <form action="" method="POST" novalidate>
+                {% csrf_token %}
+            
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p>{{error}}
+                {% endfor %}
+                {% endif %}
+
+                {% for frm in form %}
+                {{frm.label_tag}} {{frm}} {{frm.errors | striptags }} <br><br>
+                {% endfor %}
+                <div class="form-group">
+                    <input type="submit" value="Go">
+                </div>
+             </form>
+
+             <div class="form-links">
+                <a href="/login/">Login</a>
+             </div>
+        </div>
+
+{% endblock %}
+     

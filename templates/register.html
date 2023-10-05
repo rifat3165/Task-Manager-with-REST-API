@@ -1,0 +1,24 @@
+{% extends "login.html" %} {% block content %}
+
+    <div class="form-container">
+        <h2>Registration</h2>
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+
+            {% for frm in form %}
+            {{frm.label_tag}} {{frm}} {{frm.errors | striptags}} <br><br>
+            {% endfor %}  
+
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+
+        <div class="form-links">
+            <p>Already have an account? <a href="/login/">Login</a> 
+        </div>
+    </div>
+
+
+{% endblock %}
+    
